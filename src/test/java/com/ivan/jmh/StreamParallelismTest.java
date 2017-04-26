@@ -8,7 +8,7 @@ import java.util.concurrent.ForkJoinTask;
 import java.util.stream.IntStream;
 
 @State(Scope.Benchmark)
-@BenchmarkMode(Mode.AverageTime)
+@BenchmarkMode(Mode.Throughput)
 @Warmup(iterations = 10)
 @Fork(1)
 @Measurement(iterations = 10)
@@ -17,6 +17,12 @@ public class StreamParallelismTest {
     public static final int CONSUME_RANGE = 10;
 
     private IntStream stream;
+
+//    Benchmark                                       Mode  Cnt     Score     Error  Units
+//    StreamParallelismTest.sequentialStream         thrpt   10  1315,997 ±   3,486  ops/s
+//    StreamParallelismTest.parallelStream_Standard  thrpt   10  4890,669 ±  60,634  ops/s
+//    StreamParallelismTest.parallelStream_2Threads  thrpt   10   480,326 ± 132,445  ops/s
+//    StreamParallelismTest.parallelStream_6Threads  thrpt   10   114,633 ±  87,746  ops/s
 
     @Setup(Level.Invocation)
     public void setup() {
