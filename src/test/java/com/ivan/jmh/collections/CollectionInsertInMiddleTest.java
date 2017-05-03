@@ -16,7 +16,7 @@ import java.util.List;
 @Measurement(iterations = 10)
 public class CollectionInsertInMiddleTest {
 
-    public static final int COLLECTION_SIZE = 25_000;
+    private static final int COLLECTION_SIZE = 25_000;
 
 //    Benchmark                                     Mode  Cnt   Score   Error  Units
 //    CollectionInsertInMiddleTest.arrayList       thrpt   10  10,477 ± 0,022  ops/s

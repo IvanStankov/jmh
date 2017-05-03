@@ -6,10 +6,7 @@ import gnu.trove.set.hash.TIntHashSet;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
+import java.util.*;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
@@ -18,7 +15,7 @@ import java.util.LinkedList;
 @Measurement(iterations = 10)
 public class CollectionRemovalTest {
 
-    public static final int COLLECTION_SIZE = 25_000;
+    private static final int COLLECTION_SIZE = 25_000;
 
     private ArrayList<Integer> arrayList;
     private LinkedList<Integer> linkedList;
@@ -26,16 +23,18 @@ public class CollectionRemovalTest {
     private TIntLinkedList tIntLinkedList;
     private HashSet<Integer> hashSet;
     private LinkedHashSet<Integer> linkedHashSet;
+    private TreeSet<Integer> treeSet;
     private TIntHashSet tIntHashSet;
 
-//    Benchmark                              Mode  Cnt     Score    Error  Units
-//    CollectionRemovalTest.arrayList       thrpt   10  3969,495 ± 80,777  ops/s
-//    CollectionRemovalTest.linkedList      thrpt   10  4476,851 ± 65,729  ops/s
-//    CollectionRemovalTest.tIntArrayList   thrpt   10  3902,786 ± 22,512  ops/s
-//    CollectionRemovalTest.tIntLinkedList  thrpt   10  4487,632 ± 24,603  ops/s
-//    CollectionRemovalTest.hashSet         thrpt   10  2503,527 ± 16,420  ops/s
-//    CollectionRemovalTest.linkedHashSet   thrpt   10  2499,842 ± 17,137  ops/s
-//    CollectionRemovalTest.tIntHashSet     thrpt   10  1007,783 ±  7,195  ops/s
+//    Benchmark                              Mode  Cnt     Score     Error  Units
+//    CollectionRemovalTest.arrayList       thrpt   10  3927,111 ±  57,230  ops/s
+//    CollectionRemovalTest.linkedList      thrpt   10  4360,926 ± 121,257  ops/s
+//    CollectionRemovalTest.tIntArrayList   thrpt   10  3899,559 ±  64,079  ops/s
+//    CollectionRemovalTest.tIntLinkedList  thrpt   10  4490,124 ±  50,396  ops/s
+//    CollectionRemovalTest.hashSet         thrpt   10  2455,101 ±  14,791  ops/s
+//    CollectionRemovalTest.linkedHashSet   thrpt   10  2468,913 ±  14,034  ops/s
+//    CollectionRemovalTest.treeSet         thrpt   10  3267,110 ±  26,093  ops/s
+//    CollectionRemovalTest.tIntHashSet     thrpt   10   997,116 ±  10,324  ops/s
 
     @Setup(Level.Trial)
     public void setup() {
@@ -45,6 +44,7 @@ public class CollectionRemovalTest {
         tIntLinkedList = new TIntLinkedList();
         hashSet = new HashSet<>();
         linkedHashSet = new LinkedHashSet<>();
+        treeSet = new TreeSet<>();
         tIntHashSet = new TIntHashSet();
 
         for (int i = 0; i < COLLECTION_SIZE; i++) {
@@ -54,6 +54,7 @@ public class CollectionRemovalTest {
             tIntLinkedList.add(i);
             hashSet.add(i);
             linkedHashSet.add(i);
+            treeSet.add(i);
             tIntHashSet.add(i);
         }
     }
@@ -97,6 +98,13 @@ public class CollectionRemovalTest {
     public void linkedHashSet(Blackhole bh) {
         for (Integer i = 0; i < COLLECTION_SIZE; i++) {
             linkedHashSet.remove(i);
+        }
+    }
+
+    @Benchmark
+    public void treeSet(Blackhole bh) {
+        for (Integer i = 0; i < COLLECTION_SIZE; i++) {
+            treeSet.remove(i);
         }
     }
 

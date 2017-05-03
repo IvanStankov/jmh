@@ -7,10 +7,7 @@ import gnu.trove.set.hash.TIntHashSet;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
+import java.util.*;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
@@ -19,7 +16,7 @@ import java.util.LinkedList;
 @Measurement(iterations = 10)
 public class CollectionRetrievalTest {
 
-    public static final int COLLECTION_SIZE = 25_000;
+    private static final int COLLECTION_SIZE = 25_000;
 
     private ArrayList<Integer> arrayList;
     private LinkedList<Integer> linkedList;
@@ -27,16 +24,18 @@ public class CollectionRetrievalTest {
     private TIntLinkedList tIntLinkedList;
     private HashSet<Integer> hashSet;
     private LinkedHashSet<Integer> linkedHashSet;
+    private TreeSet<Integer> treeSet;
     private TIntHashSet tIntHashSet;
 
-//    Benchmark                                       Mode  Cnt     Score    Error  Units
-//    CollectionRetrievalTest.arrayList              thrpt   10  1608,387 ± 49,216  ops/s
-//    CollectionRetrievalTest.tIntArrayList          thrpt   10  1939,055 ±  6,411  ops/s
-//    CollectionRetrievalTest.linkedList             thrpt   10     0,840 ±  0,004  ops/s
-//    CollectionRetrievalTest.tIntLinkedList         thrpt   10     0,830 ±  0,005  ops/s
-//    CollectionRetrievalTest.hashSetIterator        thrpt   10   878,249 ± 18,873  ops/s
-//    CollectionRetrievalTest.linkedHashSetIterator  thrpt   10  1059,862 ±  5,092  ops/s
-//    CollectionRetrievalTest.tIntHashSetIterator    thrpt   10  1442,059 ± 24,158  ops/s
+//    Benchmark                                       Mode  Cnt     Score     Error  Units
+//    CollectionRetrievalTest.arrayList              thrpt   10  1305,534 ± 105,974  ops/s
+//    CollectionRetrievalTest.linkedList             thrpt   10     0,483 ±   0,005  ops/s
+//    CollectionRetrievalTest.tIntArrayList          thrpt   10  1882,798 ±  65,655  ops/s
+//    CollectionRetrievalTest.tIntLinkedList         thrpt   10     0,527 ±   0,006  ops/s
+//    CollectionRetrievalTest.hashSetIterator        thrpt   10   750,583 ±  25,831  ops/s
+//    CollectionRetrievalTest.linkedHashSetIterator  thrpt   10   938,768 ±  32,644  ops/s
+//    CollectionRetrievalTest.treeSetIterator        thrpt   10   514,536 ±   8,517  ops/s
+//    CollectionRetrievalTest.tIntHashSetIterator    thrpt   10  1435,792 ±  19,239  ops/s
 
     @Setup(Level.Trial)
     public void setup() {
@@ -46,6 +45,7 @@ public class CollectionRetrievalTest {
         tIntLinkedList = new TIntLinkedList();
         hashSet = new HashSet<>();
         linkedHashSet = new LinkedHashSet<>();
+        treeSet = new TreeSet<>();
         tIntHashSet = new TIntHashSet();
 
         for (int i = 0; i < COLLECTION_SIZE; i++) {
@@ -55,6 +55,7 @@ public class CollectionRetrievalTest {
             tIntLinkedList.add(i);
             hashSet.add(i);
             linkedHashSet.add(i);
+            treeSet.add(i);
             tIntHashSet.add(i);
         }
     }
@@ -101,6 +102,13 @@ public class CollectionRetrievalTest {
     @Benchmark
     public void linkedHashSetIterator(Blackhole bh) {
         for (Integer elem : linkedHashSet) {
+            bh.consume(elem);
+        }
+    }
+
+    @Benchmark
+    public void treeSetIterator(Blackhole bh) {
+        for (Integer elem : treeSet) {
             bh.consume(elem);
         }
     }

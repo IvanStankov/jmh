@@ -16,16 +16,17 @@ import java.util.*;
 @Measurement(iterations = 10)
 public class CollectionAdditionTest {
 
-    public static final int COLLECTION_SIZE = 3_000_000;
+    private static final int COLLECTION_SIZE = 1_000_000;
 
-//    Benchmark                               Mode  Cnt   Score   Error  Units
-//    CollectionAdditionTest.arrayList       thrpt   10  28,590 ± 2,154  ops/s
-//    CollectionAdditionTest.linkedList      thrpt   10  17,387 ± 6,950  ops/s
-//    CollectionAdditionTest.tIntArrayList   thrpt   10  58,763 ± 2,267  ops/s
-//    CollectionAdditionTest.tIntLinkedList  thrpt   10  47,148 ± 5,443  ops/s
-//    CollectionAdditionTest.hashSet         thrpt   10   9,320 ± 1,178  ops/s
-//    CollectionAdditionTest.linkedHashSet   thrpt   10   6,652 ± 1,206  ops/s
-//    CollectionAdditionTest.tIntHashSet     thrpt   10   7,405 ± 0,069  ops/s
+//    Benchmark                               Mode  Cnt   Score    Error  Units
+//    CollectionAdditionTest.arrayList       thrpt   10  41,953 ±  2,089  ops/s
+//    CollectionAdditionTest.linkedList      thrpt   10  35,973 ± 10,118  ops/s
+//    CollectionAdditionTest.tIntArrayList   thrpt   10  98,480 ±  2,697  ops/s
+//    CollectionAdditionTest.tIntLinkedList  thrpt   10  71,861 ±  4,538  ops/s
+//    CollectionAdditionTest.hashSet         thrpt   10  12,113 ±  1,032  ops/s
+//    CollectionAdditionTest.linkedHashSet   thrpt   10   9,319 ±  0,559  ops/s
+//    CollectionAdditionTest.treeSet         thrpt   10   2,537 ±  0,160  ops/s
+//    CollectionAdditionTest.tIntHashSet     thrpt   10   8,895 ±  0,063  ops/s
 
     @Benchmark
     public List arrayList() {
@@ -85,6 +86,17 @@ public class CollectionAdditionTest {
     @Benchmark
     public Set linkedHashSet() {
         Set<Integer> set = new LinkedHashSet<>();
+
+        for (int i = 0; i < COLLECTION_SIZE; i++) {
+            set.add(i);
+        }
+
+        return set;
+    }
+
+    @Benchmark
+    public Set treeSet() {
+        Set<Integer> set = new TreeSet<>();
 
         for (int i = 0; i < COLLECTION_SIZE; i++) {
             set.add(i);

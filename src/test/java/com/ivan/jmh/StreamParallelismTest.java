@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 @Measurement(iterations = 10)
 public class StreamParallelismTest {
 
-    public static final int CONSUME_RANGE = 10;
+    private static final int CONSUME_RANGE = 10;
 
     private IntStream stream;
 
