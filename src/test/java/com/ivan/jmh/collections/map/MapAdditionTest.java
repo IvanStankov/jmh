@@ -19,9 +19,9 @@ public class MapAdditionTest {
 //    MapAdditionTest.hashMap              thrpt   10  4,604 ± 0,931  ops/s
 //    MapAdditionTest.linkedHashMap        thrpt   10  3,732 ± 0,564  ops/s
 //    MapAdditionTest.treeMap              thrpt   10  1,225 ± 0,191  ops/s
-//    MapAdditionTest.synchronizedHashMap  thrpt   10  3,869 ± 0,511  ops/s
-//    MapAdditionTest.concurrentHashMap    thrpt   10  2,487 ± 0,374  ops/s
 //    MapAdditionTest.tLongObjectHashMap   thrpt   10  3,749 ± 0,229  ops/s
+//    MapAdditionTest.concurrentHashMap    thrpt   10  2,487 ± 0,374  ops/s
+//    MapAdditionTest.synchronizedHashMap  thrpt   10  3,869 ± 0,511  ops/s
 
     @Benchmark
     public Map<Long, String> hashMap() {

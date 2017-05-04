@@ -10,9 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
 @Warmup(iterations = 10)
-@Fork(1)
+@Fork(value = 1)
 @Measurement(iterations = 10)
-public class MapRetrievalTest {
+public class MapRemovalTest {
 
     private static final int COLLECTION_SIZE = 25_000;
 
@@ -23,13 +23,13 @@ public class MapRetrievalTest {
     private Map<Long, String> synchronizedHashMap;
     private TLongObjectHashMap<String> tLongObjectHashMap;
 
-//    Benchmark                              Mode  Cnt    Score    Error  Units
-//    MapRetrievalTest.hashMap              thrpt   10  731,712 ±  6,728  ops/s
-//    MapRetrievalTest.linkedHashMap        thrpt   10  773,652 ±  9,948  ops/s
-//    MapRetrievalTest.treeMap              thrpt   10  248,594 ±  4,492  ops/s
-//    MapRetrievalTest.tLongObjectHashMap   thrpt   10  513,576 ±  4,144  ops/s
-//    MapRetrievalTest.concurrentHashMap    thrpt   10  727,879 ± 10,511  ops/s
-//    MapRetrievalTest.synchronizedHashMap  thrpt   10  403,038 ± 19,848  ops/s
+//    Benchmark                            Mode  Cnt     Score    Error  Units
+//    MapRemovalTest.hashMap              thrpt   10  1317,882 ± 40,804  ops/s
+//    MapRemovalTest.linkedHashMap        thrpt   10  1265,977 ± 36,549  ops/s
+//    MapRemovalTest.treeMap              thrpt   10  1650,573 ± 74,480  ops/s
+//    MapRemovalTest.tLongObjectHashMap   thrpt   10   913,247 ±  5,582  ops/s
+//    MapRemovalTest.concurrentHashMap    thrpt   10  1179,907 ± 12,048  ops/s
+//    MapRemovalTest.synchronizedHashMap  thrpt   10   674,731 ± 20,214  ops/s
 
     @Setup(Level.Trial)
     public void setup() {
@@ -52,26 +52,28 @@ public class MapRetrievalTest {
         synchronizedHashMap = Collections.synchronizedMap(synchronizedHashMap);
     }
 
+
+
     @Benchmark
     public void hashMap(Blackhole bh) {
-        for (long i = 0; i < COLLECTION_SIZE; i++) {
-            String s = hashMap.get(i);
+        for (Long i = 0L; i < COLLECTION_SIZE; i++) {
+            String s = hashMap.remove(i);
             bh.consume(s);
         }
     }
 
     @Benchmark
     public void linkedHashMap(Blackhole bh) {
-        for (long i = 0; i < COLLECTION_SIZE; i++) {
-            String s = linkedHashMap.get(i);
+        for (Long i = 0L; i < COLLECTION_SIZE; i++) {
+            String s = linkedHashMap.remove(i);
             bh.consume(s);
         }
     }
 
     @Benchmark
     public void treeMap(Blackhole bh) {
-        for (long i = 0; i < COLLECTION_SIZE; i++) {
-            String s = treeMap.get(i);
+        for (Long i = 0L; i < COLLECTION_SIZE; i++) {
+            String s = treeMap.remove(i);
             bh.consume(s);
         }
     }
@@ -79,25 +81,24 @@ public class MapRetrievalTest {
     @Benchmark
     public void tLongObjectHashMap(Blackhole bh) {
         for (long i = 0; i < COLLECTION_SIZE; i++) {
-            String s = tLongObjectHashMap.get(i);
+            String s = tLongObjectHashMap.remove(i);
             bh.consume(s);
         }
     }
 
     @Benchmark
     public void synchronizedHashMap(Blackhole bh) {
-        for (long i = 0; i < COLLECTION_SIZE; i++) {
-            String s = synchronizedHashMap.get(i);
+        for (Long i = 0L; i < COLLECTION_SIZE; i++) {
+            String s = synchronizedHashMap.remove(i);
             bh.consume(s);
         }
     }
 
     @Benchmark
     public void concurrentHashMap(Blackhole bh) {
-        for (long i = 0; i < COLLECTION_SIZE; i++) {
-            String s = concurrentHashMap.get(i);
+        for (Long i = 0L; i < COLLECTION_SIZE; i++) {
+            String s = concurrentHashMap.remove(i);
             bh.consume(s);
         }
     }
-
 }
