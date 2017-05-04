@@ -4,8 +4,9 @@
 
 ### Java collections
 
-Collection of Integer type is used for the tests. Troove collections support using primitives, so int primitive is used for them.
+Comparison of throughput of different lists, sets and maps. Collections of Integer type are used for the tests. Troove collections support using primitives, so int primitive is used for them.
 
+#### Lists and Sets
 | Collection | Add | Remove | Get | Insert in the beginning | Insert in the middle | 
 | - | - | - | - | - | - |
 | ArrayList | 41.953 | 3927.111 | 1305.534 | 5.064 | 10.477 |
@@ -18,3 +19,11 @@ Collection of Integer type is used for the tests. Troove collections support usi
 | TIntHashSet | 8.895 | 997.116 | 1435.792 |  |  |
 
 #### Maps
+| Map | Add | Remove | Get |
+| - | - | - | - |
+| HashMap | 4.604 | 1317.882 | 731.712 |
+| LinkedHashMap | 3.732 | 1265.977 | 773.652 |
+| TreeMap | 1.225 | 1650.573 | 248.594 |
+| TLongObjectHashMap | 3.749 | 913.247 | 513.576 |
+| ConcurrentHashMap | 2.487 | 1179.907 | 727.879 |
+| SynchronizedHashMap | 3.869 | 674.731 | 403.038 |
