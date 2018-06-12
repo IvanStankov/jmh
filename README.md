@@ -6,7 +6,7 @@
 
 Comparison of throughput of different lists, sets and maps. Collections of Integer type are used for the tests. Troove collections support using primitives, so int primitive is used for them.
 
-#### Lists and Sets
+#### Lists and Sets (op/s)
 | Collection | Add | Remove | Get | Insert in the beginning | Insert in the middle | 
 | - | - | - | - | - | - |
 | ArrayList | 41.953 | 3927.111 | 1305.534 | 5.064 | 10.477 |
@@ -18,7 +18,7 @@ Comparison of throughput of different lists, sets and maps. Collections of Integ
 | TreeSet | 2.537 | 3267.110 | 514.536 |  |  |
 | TIntHashSet | 8.895 | 997.116 | 1435.792 |  |  |
 
-#### Maps
+#### Maps (op/s)
 | Map | Add | Remove | Get |
 | - | - | - | - |
 | HashMap | 4.604 | 1317.882 | 731.712 |
