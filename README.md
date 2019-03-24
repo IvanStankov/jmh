@@ -27,3 +27,10 @@ Comparison of throughput of different lists, sets and maps. Collections of Integ
 | TLongObjectHashMap | 3.749 | 913.247 | 513.576 |
 | ConcurrentHashMap | 2.487 | 1179.907 | 727.879 |
 | SynchronizedHashMap | 3.869 | 674.731 | 403.038 |
+
+#### Queue (op/s)
+100 000 elements
+| Queue | Add | Poll |
+| - | - | - |
+| ArrayDeque | 1955,492 | 2548,506 |
+| LinkedList | 1403,889 | 1546,397 |
