@@ -30,6 +30,7 @@ Comparison of throughput of different lists, sets and maps. Collections of Integ
 
 #### Queue (op/s)
 100 000 elements
+
 | Queue | Add | Poll |
 | - | - | - |
 | ArrayDeque | 1955,492 | 2548,506 |
